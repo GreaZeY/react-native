@@ -1,17 +1,6 @@
 import { useSelector } from "react-redux";
-import { Image, View, Text, StyleSheet,SafeAreaView,TouchableHighlight } from "react-native";
-
-
-const styles = StyleSheet.create({
-  catContainer: {
-    display:'flex',
-    flexDirection:'row',
-    width:'100%',
-    alignItems: 'center',
-    marginBottom:20,
- 
-  }
-})
+import { Image, View, Text,TouchableHighlight } from "react-native";
+import { styles } from "../../styles";
 
 
 const Categories = ({navigation}) => {
@@ -19,14 +8,13 @@ const Categories = ({navigation}) => {
 
 
   return (
-    <SafeAreaView>
-           
-      <View style={{ alignItems: "center", marginTop: 50,padding:10 }}>
+    
+      <View style={styles.container}>
         
         {
         categories.map((category) => (
           <TouchableHighlight  key={category.id}
-          style={styles.catContainer}
+          style={styles.card}
           onPress={()=>navigation.navigate('Products',{category:category.categoryname})}>
           <>
             <Image
@@ -45,7 +33,7 @@ const Categories = ({navigation}) => {
         }
 
       </View>
-    </SafeAreaView>
+ 
   );
 };
 

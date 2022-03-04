@@ -37,7 +37,7 @@ export const getAllCategories = () => async (dispatch) => {
 export const getAllProducts = () => async (dispatch) => {
   try {
     const { data } = await axios.get(`${apiBaseURL}/api/products`);
-    
+    data.shift()
     dispatch(receiveProducts(data));
     return data;
   } catch (error) {
