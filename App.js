@@ -1,22 +1,32 @@
-import { StatusBar } from 'expo-status-bar';
 import store from './store';
-import { StyleSheet, View,SafeAreaView } from 'react-native';
 import {Provider} from "react-redux";
-import Home from './Components/Home/Home.jsx'
-import { getAllCategories } from './actions';
+import Categories from './Components/Categories/Categories.jsx'
+import { getAllCategories, getAllProducts } from './actions';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Products from './Components/Products/Products.jsx';
 
+const Stack =  createNativeStackNavigator()
 
 export default function App() {
+  // dispatching initail data to display
    store.dispatch( getAllCategories() );
+   store.dispatch( getAllProducts() );
+
+
+
   return (
     <Provider store={ store } >
-    <View >
-      <StatusBar backgroundColor='#a6c76c' style="auto" />
-      <SafeAreaView>
-       <Home/>
+    <NavigationContainer >
+
+      <Stack.Navigator initialRouteName='Categories' >
       
-      </SafeAreaView>
-    </View>
+   
+       <Stack.Screen name='Categories' component={Categories} />
+       <Stack.Screen name='Products' component={Products} />
+     
+      </Stack.Navigator>
+    </NavigationContainer>
     </Provider>
   );
 }

@@ -11,12 +11,34 @@ export const receiveCategories = (categories) => ({
   categories,
 });
 
+//recieve Products
+export const receiveProducts = (products) => ({
+  type: types.GET_PRODUCTS,
+  products,
+});
+
+
 // get all categories //
 export const getAllCategories = () => async (dispatch) => {
   try {
     const { data } = await axios.get(`${apiBaseURL}/api/categories`);
     
     dispatch(receiveCategories(data));
+    return data;
+  } catch (error) {
+        // toast.dark(error.toString().replace("Error:", ""),{theme:'dark'});
+
+    console.log(error);
+  }
+};
+
+
+// get all Products //
+export const getAllProducts = () => async (dispatch) => {
+  try {
+    const { data } = await axios.get(`${apiBaseURL}/api/products`);
+    
+    dispatch(receiveProducts(data));
     return data;
   } catch (error) {
         // toast.dark(error.toString().replace("Error:", ""),{theme:'dark'});
